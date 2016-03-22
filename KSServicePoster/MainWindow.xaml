@@ -1,21 +1,26 @@
 ﻿<Window x:Class="KSServicePoster.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:app="clr-namespace:KSServicePoster"
         Title="Poster" ResizeMode="NoResize" 
-        WindowStyle="None" Width="400" Height="400" 
+        WindowStyle="None" Topmost="True" WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
-        Loaded="Window_Loaded">
-    <!--Topmost="True" WindowState="Maximized"-->
+        Loaded="Window_Loaded"
+        x:Name="Root">
     <Grid>
         <Grid>
+            
             <Grid x:Name="Landscape_Full">
+                <app:MediaPanel x:Name="mediaPanel_CC_Landscape_Full"/>
             </Grid>
+            
             <Grid x:Name="Landscape_L1_R21">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
+                    <app:MediaPanel x:Name="mediaPanel_CL_Landscape_L1_R21"/>
                 </Grid>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -23,17 +28,21 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0" >
+                        <app:MediaPanel x:Name="mediaPanel_TR_Landscape_L1_R21"/>
                     </Grid>
                     <Grid Grid.Row="1">
+                        <app:MediaPanel x:Name="mediaPanel_BR_Landscape_L1_R21"/>
                     </Grid>
                 </Grid>
             </Grid>
+            
             <Grid x:Name="Landscape_L1_R111">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
+                    <app:MediaPanel x:Name="mediaPanel_CL_Landscape_L1_R111"/>
                 </Grid>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -42,27 +51,35 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
+                        <app:MediaPanel x:Name="mediaPanel_TR_Landscape_L1_R111"/>
                     </Grid>
                     <Grid Grid.Row="1">
+                        <app:MediaPanel x:Name="mediaPanel_CR_Landscape_L1_R111"/>
                     </Grid>
                     <Grid Grid.Row="2">
+                        <app:MediaPanel x:Name="mediaPanel_BR_Landscape_L1_R111"/>
                     </Grid>
                 </Grid>
             </Grid>
+            
             <Grid x:Name="Landscape_Full_BottomMarquee">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="90"/>
                 </Grid.RowDefinitions>
                 <Grid>
+                    <app:MediaPanel x:Name="mediaPanel_CC_Landscape_Full_BottomMarquee"/>
                 </Grid>
-                <Grid>
-                </Grid>
+                <Canvas Grid.Row="1" x:Name="marquee_background_Landscape_Full_BottomMarquee">
+                    <TextBlock x:Name="marquee_Landscape_Full_BottomMarquee"
+                               FontSize="50" Canvas.Top="10"/>
+                </Canvas>
             </Grid>
+            
             <Grid x:Name="Landscape_BottomMarquee_L1_R11">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="90"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
@@ -70,6 +87,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
+                        <app:MediaPanel x:Name="mediaPanel_CL_Landscape_BottomMarquee_L1_R11"/>
                     </Grid>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
@@ -77,18 +95,23 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
+                            <app:MediaPanel x:Name="mediaPanel_TR_Landscape_BottomMarquee_L1_R11"/>
                         </Grid>
                         <Grid Grid.Row="1">
+                            <app:MediaPanel x:Name="mediaPanel_BR_Landscape_BottomMarquee_L1_R11"/>
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid Grid.Row="1">
-                </Grid>
+                <Canvas Grid.Row="1" x:Name="marquee_background_Landscape_BottomMarquee_L1_R11">
+                    <TextBlock x:Name="marquee_Landscape_BottomMarquee_L1_R11"
+                               FontSize="50" Canvas.Top="10"/>
+                </Canvas>
             </Grid>
+            
             <Grid x:Name="Landscape_BottomMarquee_L1_R21">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="90"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
@@ -96,6 +119,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
+                        <app:MediaPanel x:Name="mediaPanel_CC_Landscape_BottomMarquee_L1_R21"/>
                     </Grid>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
@@ -103,14 +127,19 @@
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
+                            <app:MediaPanel x:Name="mediaPanel_TR_Landscape_BottomMarquee_L1_R21"/>
                         </Grid>
                         <Grid Grid.Row="1">
+                            <app:MediaPanel x:Name="mediaPanel_BR_Landscape_BottomMarquee_L1_R21"/>
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid Grid.Row="1">
-                </Grid>
+                <Canvas Grid.Row="1" x:Name="marquee_background_Landscape_BottomMarquee_L1_R21">
+                    <TextBlock x:Name="marquee_Landscape_BottomMarquee_L1_R21"
+                               FontSize="50" Canvas.Top="10"/>
+                </Canvas>
             </Grid>
+            
             <Grid x:Name="Landscape_L1_C1_R1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -118,16 +147,20 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
+                    <app:MediaPanel x:Name="mediaPanel_CL_Landscape_L1_C1_R1"/>
                 </Grid>
                 <Grid Grid.Column="1">
+                    <app:MediaPanel x:Name="mediaPanel_CC_Landscape_L1_C1_R1"/>
                 </Grid>
                 <Grid Grid.Column="2">
+                    <app:MediaPanel x:Name="mediaPanel_CR_Landscape_L1_C1_R1"/>
                 </Grid>
             </Grid>
+            
             <Grid x:Name="Landscape_BottomMarquee_L1_C1_R1">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="90"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
@@ -136,45 +169,63 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
+                        <app:MediaPanel x:Name="mediaPanel_CL_Landscape_BottomMarquee_L1_C1_R1"/>
                     </Grid>
                     <Grid Grid.Column="1">
+                        <app:MediaPanel x:Name="mediaPanel_CC_Landscape_BottomMarquee_L1_C1_R1"/>
                     </Grid>
                     <Grid Grid.Column="2">
+                        
+                        <app:MediaPanel x:Name="mediaPanel_CR_Landscape_BottomMarquee_L1_C1_R1"/>
                     </Grid>
                 </Grid>
-                <Grid Grid.Row="1">
-                </Grid>
+                <Canvas Grid.Row="1" x:Name="marquee_background_Landscape_BottomMarquee_L1_C1_R1">
+                    <TextBlock x:Name="marquee_Landscape_BottomMarquee_L1_C1_R1"
+                               FontSize="50" Canvas.Top="10"/>
+                </Canvas>
             </Grid>
+            
             <Grid x:Name="Portrait_Full">
+                <app:MediaPanel x:Name="mediaPanel_CC_Portrait_Full"/>
             </Grid>
+            
             <Grid x:Name="Portrait_Full_TopMarquee">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="90"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                </Grid>
+                <Canvas Grid.Row="0" x:Name="marquee_background_Portrait_Full_TopMarquee">
+                    <TextBlock x:Name="marquee_Portrait_Full_TopMarquee"
+                               FontSize="50" Canvas.Top="10"/>
+                </Canvas>
                 <Grid Grid.Row="1">
+                    <app:MediaPanel x:Name="mediaPanel_CC_Portrait_Full_TopMarquee"/>
                 </Grid>
             </Grid>
+            
             <Grid x:Name="Portrait_CenterMarquee_T1_B3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
+                    <app:MediaPanel x:Name="mediaPanel_TC_Portrait_CenterMarquee_T1_B3"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="90"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                    </Grid>
+                    <Canvas Grid.Row="0" x:Name="marquee_background_Portrait_CenterMarquee_T1_B3">
+                        <TextBlock x:Name="marquee_Portrait_CenterMarquee_T1_B3"
+                               FontSize="50" Canvas.Top="10"/>
+                    </Canvas>
                     <Grid Grid.Row="1">
+                        <app:MediaPanel x:Name="mediaPanel_BC_Portrait_CenterMarquee_T1_B3"/>
                     </Grid>
                 </Grid>
             </Grid>
+            
             <Grid x:Name="Portrait_T1_C1_B1">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -182,12 +233,16 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
+                    <app:MediaPanel x:Name="mediaPanel_TC_Portrait_T1_C1_B1"/>
                 </Grid>
                 <Grid Grid.Row="1">
+                    <app:MediaPanel x:Name="mediaPanel_CC_Portrait_T1_C1_B1"/>
                 </Grid>
                 <Grid Grid.Row="2">
+                    <app:MediaPanel x:Name="mediaPanel_BC_Portrait_T1_C1_B1"/>
                 </Grid>
             </Grid>
+            
             <Grid x:Name="Portrait_T1_C1_CL1_CR1_B1">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -195,6 +250,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
+                    <app:MediaPanel x:Name="mediaPanel_TC_Portrait_T1_C1_CL1_CR1_B1"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -202,13 +258,17 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
+                        <app:MediaPanel x:Name="mediaPanel_CL_Portrait_T1_C1_CL1_CR1_B1"/>
                     </Grid>
                     <Grid Grid.Column="1">
+                        <app:MediaPanel x:Name="mediaPanel_CR_Portrait_T1_C1_CL1_CR1_B1"/>
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="2">
+                    <app:MediaPanel x:Name="mediaPanel_BC_Portrait_T1_C1_CL1_CR1_B1"/>
                 </Grid>
             </Grid>
         </Grid>
+        
     </Grid>
 </Window>

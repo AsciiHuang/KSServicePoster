@@ -72,20 +72,6 @@ namespace KSServicePoster
             }
         }
 
-        private Constants.MediaRepeat repeat = Constants.MediaRepeat.None;
-        public Constants.MediaRepeat Repeat
-        {
-            get
-            {
-                return repeat;
-            }
-            set
-            {
-                repeat = value;
-                NotifyPropertyChanged("Repeat");
-            }
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName = "")
         {

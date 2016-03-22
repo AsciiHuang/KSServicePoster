@@ -48,17 +48,6 @@ namespace KSServicePoster
             Unlimited, 
         }
 
-        public enum MediaRepeat
-        {
-            None,
-            Repeat1,
-            Repeat2,
-            Repeat3,
-            Repeat4,
-            Repeat5, 
-            Unlimited, 
-        }
-
         public enum MediaLayoutPosition
         {
             None, 
