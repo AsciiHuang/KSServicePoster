@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:app="clr-namespace:KSServicePoster"
         Title="Poster" ResizeMode="NoResize" 
-        WindowStyle="None" Topmost="True" WindowState="Maximized"
+        WindowStyle="None" Topmost="True" WindowState="Maximized" 
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
         x:Name="Root">

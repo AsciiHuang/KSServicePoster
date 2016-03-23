@@ -15,25 +15,40 @@ namespace KSServicePoster
     {
         public MediaPanel()
         {
+            ImageMedia.Stretch = Stretch.Fill;
             VideoMedia.Stretch = Stretch.Fill;
+            Children.Add(ImageMedia);
             Children.Add(VideoMedia);
         }
 
-        private int preIndex = -1;
         private int currentIndex = 0;
         private List<MediaData> mediaItems = new List<MediaData>();
+        private List<BitmapImage> bitmapImages = new List<BitmapImage>();
+        private List<Uri> videos = new List<Uri>();
         private DispatcherTimer timer = null;
 
+        private Image ImageMedia = new Image();
         private MediaElement VideoMedia = new MediaElement();
 
         public void setData(List<MediaData> items)
         {
             mediaItems.Clear();
+            String appPath = System.AppDomain.CurrentDomain.BaseDirectory;
             for (int i = 0; i < items.Count; ++i)
             {
-                mediaItems.Add(items[i]);
+                MediaData data = items[i];
+                mediaItems.Add(data);
+                if (data.Type == Constants.MediaType.Photo)
+                {
+                    videos.Add(null);
+                    bitmapImages.Add(new BitmapImage(new Uri(appPath + data.Path, UriKind.Absolute)));
+                }
+                else
+                {
+                    bitmapImages.Add(null);
+                    videos.Add(new Uri(data.Path, UriKind.Relative));
+                }
             }
-
             refreshMediaData();
         }
 
@@ -45,11 +60,7 @@ namespace KSServicePoster
                 timer.Stop();
             }
             MediaData currentMediaData = mediaItems[currentIndex];
-            if (currentMediaData.Type == Constants.MediaType.Photo && currentMediaData.Path.ToLower().EndsWith(".gif"))
-            {
-                handleVideo(currentMediaData);
-            }
-            else if (currentMediaData.Type == Constants.MediaType.Photo)
+            if (currentMediaData.Type == Constants.MediaType.Photo)
             {
                 handleImage(currentMediaData);
             }
@@ -71,7 +82,9 @@ namespace KSServicePoster
 
         private void handleImage(MediaData currentMediaData)
         {
-            VideoMedia.Source = new Uri(currentMediaData.Path, UriKind.Relative);
+            ImageMedia.Visibility = System.Windows.Visibility.Visible;
+            VideoMedia.Visibility = System.Windows.Visibility.Hidden;
+            ImageMedia.Source = bitmapImages[currentIndex];
             timer = new DispatcherTimer();
             timer.Interval = getTimeSpan(currentMediaData.Duration);
             timer.Tick += OnTimerTick;
@@ -80,13 +93,17 @@ namespace KSServicePoster
 
         private void handleVideo(MediaData currentMediaData)
         {
+            ImageMedia.Visibility = System.Windows.Visibility.Hidden;
+            VideoMedia.Visibility = System.Windows.Visibility.Visible;
             VideoMedia.MediaEnded += OnVideoMediaPlayEnded;
-            VideoMedia.Source = new Uri(currentMediaData.Path, UriKind.Relative);
+            VideoMedia.Source = videos[currentIndex];
         }
 
         private void handleNull()
         {
-            // set to null and wait 5 seconds
+            ImageMedia.Visibility = System.Windows.Visibility.Hidden;
+            VideoMedia.Visibility = System.Windows.Visibility.Hidden;
+            ImageMedia.Source = null;
             VideoMedia.Source = null;
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(5);
@@ -96,7 +113,6 @@ namespace KSServicePoster
 
         private TimeSpan getTimeSpan(Constants.MediaDuration duration)
         {
-            
             if (duration == Constants.MediaDuration.Second5)
             {
                 return TimeSpan.FromSeconds(5);
