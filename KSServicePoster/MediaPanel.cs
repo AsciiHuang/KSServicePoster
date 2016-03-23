@@ -19,6 +19,7 @@ namespace KSServicePoster
             Children.Add(VideoMedia);
         }
 
+        private int preIndex = -1;
         private int currentIndex = 0;
         private List<MediaData> mediaItems = new List<MediaData>();
         private DispatcherTimer timer = null;
@@ -44,35 +45,21 @@ namespace KSServicePoster
                 timer.Stop();
             }
             MediaData currentMediaData = mediaItems[currentIndex];
-            if (currentMediaData.Type == Constants.MediaType.Photo)
+            if (currentMediaData.Type == Constants.MediaType.Photo && currentMediaData.Path.ToLower().EndsWith(".gif"))
             {
-                if (currentMediaData.Path.ToLower().EndsWith(".gif"))
-                {
-                    VideoMedia.MediaEnded += OnVideoMediaPlayEnded;
-                    VideoMedia.Source = new Uri(currentMediaData.Path, UriKind.Relative);
-                }
-                else
-                {
-                    VideoMedia.Source = new Uri(currentMediaData.Path, UriKind.Relative);
-                    timer = new DispatcherTimer();
-                    timer.Interval = getTimeSpan(currentMediaData.Duration);
-                    timer.Tick += OnTimerTick;
-                    timer.Start();
-                }
+                handleVideo(currentMediaData);
+            }
+            else if (currentMediaData.Type == Constants.MediaType.Photo)
+            {
+                handleImage(currentMediaData);
             }
             else if (currentMediaData.Type == Constants.MediaType.Video)
             {
-                VideoMedia.MediaEnded += OnVideoMediaPlayEnded;
-                VideoMedia.Source = new Uri(currentMediaData.Path, UriKind.Relative);
+                handleVideo(currentMediaData);
             }
             else
             {
-                // set to null and wait 5 seconds
-                VideoMedia.Source = null;
-                timer = new DispatcherTimer();
-                timer.Interval = TimeSpan.FromSeconds(5);
-                timer.Tick += OnTimerTick;
-                timer.Start();
+                handleNull();
             }
 
             ++currentIndex;
@@ -80,6 +67,31 @@ namespace KSServicePoster
             {
                 currentIndex = 0;
             }
+        }
+
+        private void handleImage(MediaData currentMediaData)
+        {
+            VideoMedia.Source = new Uri(currentMediaData.Path, UriKind.Relative);
+            timer = new DispatcherTimer();
+            timer.Interval = getTimeSpan(currentMediaData.Duration);
+            timer.Tick += OnTimerTick;
+            timer.Start();
+        }
+
+        private void handleVideo(MediaData currentMediaData)
+        {
+            VideoMedia.MediaEnded += OnVideoMediaPlayEnded;
+            VideoMedia.Source = new Uri(currentMediaData.Path, UriKind.Relative);
+        }
+
+        private void handleNull()
+        {
+            // set to null and wait 5 seconds
+            VideoMedia.Source = null;
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(5);
+            timer.Tick += OnTimerTick;
+            timer.Start();
         }
 
         private TimeSpan getTimeSpan(Constants.MediaDuration duration)
