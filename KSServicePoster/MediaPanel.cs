@@ -43,10 +43,15 @@ namespace KSServicePoster
                     videos.Add(null);
                     bitmapImages.Add(new BitmapImage(new Uri(appPath + data.Path, UriKind.Absolute)));
                 }
-                else
+                else if (data.Type == Constants.MediaType.Video)
                 {
                     bitmapImages.Add(null);
                     videos.Add(new Uri(data.Path, UriKind.Relative));
+                }
+                else
+                {
+                    videos.Add(null);
+                    bitmapImages.Add(null);
                 }
             }
             refreshMediaData();
