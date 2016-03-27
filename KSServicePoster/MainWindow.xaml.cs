@@ -236,7 +236,7 @@ namespace KSServicePoster
                     //doubleAnimation.To = -textMarquee.ActualWidth;
                     doubleAnimation.To = -marqueeItem.Content.Length * 50;
                     doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
-                    doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(10));
+                    doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(20));
                     textMarquee.BeginAnimation(Canvas.LeftProperty, doubleAnimation);
                 }
             }

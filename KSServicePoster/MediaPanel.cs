@@ -59,19 +59,24 @@ namespace KSServicePoster
 
         private void refreshMediaData()
         {
+            VideoMedia.Source = null;
             VideoMedia.MediaEnded -= OnVideoMediaPlayEnded;
             if (timer != null)
             {
                 timer.Stop();
             }
             MediaData currentMediaData = mediaItems[currentIndex];
-            if (currentMediaData.Type == Constants.MediaType.Photo)
+            if (currentMediaData.Type == Constants.MediaType.Photo && currentMediaData.Path.ToLower().EndsWith("gif"))
+            {
+                handleVideo(currentMediaData, false);
+            }
+            else if (currentMediaData.Type == Constants.MediaType.Photo)
             {
                 handleImage(currentMediaData);
             }
             else if (currentMediaData.Type == Constants.MediaType.Video)
             {
-                handleVideo(currentMediaData);
+                handleVideo(currentMediaData, true);
             }
             else
             {
@@ -96,12 +101,19 @@ namespace KSServicePoster
             timer.Start();
         }
 
-        private void handleVideo(MediaData currentMediaData)
+        private void handleVideo(MediaData currentMediaData, Boolean video)
         {
             ImageMedia.Visibility = System.Windows.Visibility.Hidden;
             VideoMedia.Visibility = System.Windows.Visibility.Visible;
             VideoMedia.MediaEnded += OnVideoMediaPlayEnded;
-            VideoMedia.Source = videos[currentIndex];
+            if (video)
+            {
+                VideoMedia.Source = videos[currentIndex];
+            }
+            else
+            {
+                VideoMedia.Source = new Uri(currentMediaData.Path, UriKind.Relative);
+            }
         }
 
         private void handleNull()
