@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:app="clr-namespace:KSServicePoster"
         Title="Poster" ResizeMode="NoResize" 
-        WindowStyle="None" Topmost="True" WindowState="Maximized" 
+        WindowStyle="None" 
+        WindowState="Maximized" 
+        Topmost="True" 
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
         x:Name="Root">
@@ -72,7 +74,11 @@
                 </Grid>
                 <Canvas Grid.Row="1" x:Name="marquee_background_Landscape_Full_BottomMarquee">
                     <TextBlock x:Name="marquee_Landscape_Full_BottomMarquee"
-                               FontSize="50" Canvas.Top="10"/>
+                               FontSize="50" Canvas.Top="10">
+                        <TextBlock.RenderTransform>
+                            <TranslateTransform x:Name="marquee_Translate_Landscape_Full_BottomMarquee" />
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
                 </Canvas>
             </Grid>
             
@@ -104,7 +110,11 @@
                 </Grid>
                 <Canvas Grid.Row="1" x:Name="marquee_background_Landscape_BottomMarquee_L1_R11">
                     <TextBlock x:Name="marquee_Landscape_BottomMarquee_L1_R11"
-                               FontSize="50" Canvas.Top="10"/>
+                               FontSize="50" Canvas.Top="10">
+                        <TextBlock.RenderTransform>
+                            <TranslateTransform x:Name="marquee_Translate_Landscape_BottomMarquee_L1_R11" />
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
                 </Canvas>
             </Grid>
             
@@ -136,7 +146,11 @@
                 </Grid>
                 <Canvas Grid.Row="1" x:Name="marquee_background_Landscape_BottomMarquee_L1_R21">
                     <TextBlock x:Name="marquee_Landscape_BottomMarquee_L1_R21"
-                               FontSize="50" Canvas.Top="10"/>
+                               FontSize="50" Canvas.Top="10">
+                        <TextBlock.RenderTransform>
+                            <TranslateTransform x:Name="marquee_Translate_Landscape_BottomMarquee_L1_R21" />
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
                 </Canvas>
             </Grid>
             
@@ -181,7 +195,11 @@
                 </Grid>
                 <Canvas Grid.Row="1" x:Name="marquee_background_Landscape_BottomMarquee_L1_C1_R1">
                     <TextBlock x:Name="marquee_Landscape_BottomMarquee_L1_C1_R1"
-                               FontSize="50" Canvas.Top="10"/>
+                               FontSize="50" Canvas.Top="10">
+                        <TextBlock.RenderTransform>
+                            <TranslateTransform x:Name="marquee_Translate_Landscape_BottomMarquee_L1_C1_R1" />
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
                 </Canvas>
             </Grid>
             
@@ -196,7 +214,11 @@
                 </Grid.RowDefinitions>
                 <Canvas Grid.Row="0" x:Name="marquee_background_Portrait_Full_TopMarquee">
                     <TextBlock x:Name="marquee_Portrait_Full_TopMarquee"
-                               FontSize="50" Canvas.Top="10"/>
+                               FontSize="50" Canvas.Top="10">
+                        <TextBlock.RenderTransform>
+                            <TranslateTransform x:Name="marquee_Translate_Portrait_Full_TopMarquee" />
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
                 </Canvas>
                 <Grid Grid.Row="1">
                     <app:MediaPanel x:Name="mediaPanel_CC_Portrait_Full_TopMarquee"/>
@@ -218,7 +240,11 @@
                     </Grid.RowDefinitions>
                     <Canvas Grid.Row="0" x:Name="marquee_background_Portrait_CenterMarquee_T1_B3">
                         <TextBlock x:Name="marquee_Portrait_CenterMarquee_T1_B3"
-                               FontSize="50" Canvas.Top="10"/>
+                               FontSize="50" Canvas.Top="10">
+                            <TextBlock.RenderTransform>
+                                <TranslateTransform x:Name="marquee_Translate_Portrait_CenterMarquee_T1_B3" />
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
                     </Canvas>
                     <Grid Grid.Row="1">
                         <app:MediaPanel x:Name="mediaPanel_BC_Portrait_CenterMarquee_T1_B3"/>

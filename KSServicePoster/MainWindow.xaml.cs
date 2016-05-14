@@ -42,6 +42,7 @@ namespace KSServicePoster
         private List<MediaData> bRItems = new List<MediaData>();
 
         private Marquee marqueeItem = new Marquee();
+        private DoubleAnimation doubleAnimation = new DoubleAnimation();
         private Storyboard marqueeStoryboard = new Storyboard();
 
         public MainWindow()
@@ -193,35 +194,47 @@ namespace KSServicePoster
             {
                 TextBlock textMarquee = null;
                 Canvas canvasMarquee = null;
+
+                doubleAnimation.From = this.ActualWidth;
+                doubleAnimation.To = marqueeItem.Content.Length * -50; // -textMarquee.ActualWidth;
+                doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
+                doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(20));
+
                 if (layoutType == Constants.LayoutType.Landscape_Full_BottomMarquee)
                 {
                     textMarquee = marquee_Landscape_Full_BottomMarquee;
                     canvasMarquee = marquee_background_Landscape_Full_BottomMarquee;
+                    Storyboard.SetTargetName(doubleAnimation, "marquee_Translate_Landscape_Full_BottomMarquee");
                 }
                 else if (layoutType == Constants.LayoutType.Landscape_BottomMarquee_L1_R11)
                 {
                     textMarquee = marquee_Landscape_BottomMarquee_L1_R11;
                     canvasMarquee = marquee_background_Landscape_BottomMarquee_L1_R11;
+                    Storyboard.SetTargetName(doubleAnimation, "marquee_Translate_Landscape_BottomMarquee_L1_R11");
                 }
                 else if (layoutType == Constants.LayoutType.Landscape_BottomMarquee_L1_R21)
                 {
                     textMarquee = marquee_Landscape_BottomMarquee_L1_R21;
                     canvasMarquee = marquee_background_Landscape_BottomMarquee_L1_R21;
+                    Storyboard.SetTargetName(doubleAnimation, "marquee_Translate_Landscape_BottomMarquee_L1_R21");
                 }
                 else if (layoutType == Constants.LayoutType.Landscape_BottomMarquee_L1_C1_R1)
                 {
                     textMarquee = marquee_Landscape_BottomMarquee_L1_C1_R1;
                     canvasMarquee = marquee_background_Landscape_BottomMarquee_L1_C1_R1;
+                    Storyboard.SetTargetName(doubleAnimation, "marquee_Translate_Landscape_BottomMarquee_L1_C1_R1");
                 }
                 else if (layoutType == Constants.LayoutType.Portrait_Full_TopMarquee)
                 {
                     textMarquee = marquee_Portrait_Full_TopMarquee;
                     canvasMarquee = marquee_background_Portrait_Full_TopMarquee;
+                    Storyboard.SetTargetName(doubleAnimation, "marque_Translatee_Portrait_Full_TopMarquee");
                 }
                 else if (layoutType == Constants.LayoutType.Portrait_CenterMarquee_T1_B3)
                 {
                     textMarquee = marquee_Portrait_CenterMarquee_T1_B3;
                     canvasMarquee = marquee_background_Portrait_CenterMarquee_T1_B3;
+                    Storyboard.SetTargetName(doubleAnimation, "marquee_Translate_Portrait_CenterMarquee_T1_B3");
                 }
 
                 if (textMarquee != null)
@@ -231,13 +244,14 @@ namespace KSServicePoster
                     Color backgroundColor = (Color)ColorConverter.ConvertFromString(marqueeItem.Background);
                     textMarquee.Foreground = new SolidColorBrush(fontColor);
                     canvasMarquee.Background = new SolidColorBrush(backgroundColor);
-                    DoubleAnimation doubleAnimation = new DoubleAnimation();
-                    doubleAnimation.From = this.ActualWidth;
-                    //doubleAnimation.To = -textMarquee.ActualWidth;
-                    doubleAnimation.To = -marqueeItem.Content.Length * 50;
-                    doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
-                    doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(20));
-                    textMarquee.BeginAnimation(Canvas.LeftProperty, doubleAnimation);
+
+                    // Old Animation, very lag
+                    //textMarquee.BeginAnimation(Canvas.LeftProperty, doubleAnimation);
+
+                    // Use TranslateTransform
+                    Storyboard.SetTargetProperty(doubleAnimation, new PropertyPath(TranslateTransform.XProperty));
+                    marqueeStoryboard.Children.Add(doubleAnimation);
+                    marqueeStoryboard.Begin(textMarquee);
                 }
             }
         }
